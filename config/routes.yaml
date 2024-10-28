@@ -270,13 +270,14 @@ PapyrillioBeehive_IndexEntry:
         type: 'Neues Wort'
 
 PapyrillioBeehive_IndexEntryManageAssignments:
-    path:  /tinkerkit/indexEntry/manageAssignments/{compilationId}/{type}/{topic}/{search}
+    path:  /tinkerkit/indexEntry/manageAssignments/{compilationId}/{type}/{topic}/{search}/{page}
     controller: App\Controller\TinkerkitController::manageIndexEntryAssignments
     defaults:
         compilationId: 5
         type: 'Neues Wort'
         topic: 'Personenennamen'
         search: null
+        page: null
 
 # Apiary
 

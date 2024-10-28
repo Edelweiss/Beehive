@@ -20,9 +20,14 @@
     {% endfor %}
   </select>
 
-  <label for="topic">Suchbegriff:</label>
-  <input id="search" name="search" type="text" value="{{ search }}"/>
+  <br/>
 
-  <input type="submit" value="Daten laden" onClick="window.location = '/beehive/tinkerkit/indexEntry/manageAssignments/' + $('#compilationId').val() + '/' + $('#type').val() + '/' + $('#topic').val() + '/' + $('#search').val(); return false;"/>
+  <label for="topic">Suchbegriff:</label>
+  <input id="search" name="search" type="text" value="{{ search != '_' ? search : '' }}"/>
+
+  <label for="topic">Seite:</label>
+  <input id="page" name="page" type="text" value="{{ page }}"/>
+
+  <input type="submit" value="Daten laden" onClick="window.location = '{{ path('PapyrillioBeehive_IndexEntryManageAssignments', {}) }}' + '/' + $('#compilationId').val() + '/' + $('#type').val() + '/' + $('#topic').val() + '/' + ($('#search').val() ? $('#search').val() : '_') + '/' + $('#page').val(); return false;"/>
 </p>
 </form>

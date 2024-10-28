@@ -8,13 +8,14 @@ use App\Entity\IndexEntry;
 use Symfony\Component\HttpFoundation\Response;
 
 class TinkerkitController extends BeehiveController{
-  public function manageIndexEntryAssignments($compilationId, $type, $topic, $search = null): Response {
+
+  public function manageIndexEntryAssignments($compilationId, $type, $topic, $search = null, $page = null): Response {
     return $this->render('tinkerkit/manageIndexEntryAssignments.html.twig', [
-      'compilationId'   => $compilationId, 'type' => $type, 'topic' => $topic, 'search' => $search,
+      'compilationId'   => $compilationId, 'type' => $type, 'topic' => $topic, 'search' => $search, 'page' => $page,
       'compilationList' => $this->getCompilationList(),
       'topicList'       => $this->getTopicList(),
-      'indexEntryList'  => $this->getIndexEntryList($compilationId, $type, $topic),
-      'correctionList'  => $this->getCorrectionList($compilationId, $search)]);
+      'indexEntryList'  => $this->getIndexEntryList($compilationId, $type, $topic, $page),
+      'correctionList'  => $this->getCorrectionList($compilationId, $search, $page)]);
   }
   private function getCompilationList(){
     $entityManager = $this->getDoctrine()->getManager();
@@ -34,30 +35,42 @@ class TinkerkitController extends BeehiveController{
     }
     return $topicList;
   }
-  private function getIndexEntryList($compilationId, $type, $topic){
+  private function getIndexEntryList($compilationId, $type, $topic, $page = null){
     $entityManager = $this->getDoctrine()->getManager();
     $repository = $entityManager->getRepository(IndexEntry::class);
+    $parameters = ['type'=> $type, 'topic' => $topic, 'compilationId' => $compilationId];
+    if($page){
+      //$parameters['page'] = '%' . $page . '%';
+    }
 
     $queryB = $entityManager->createQueryBuilder()
-     ->select('ie')
-     ->from('App\Entity\IndexEntry', 'ie')
-     ->join('App\Entity\Compilation', 'c')
-     ->where('c.id = :compilationId AND ie.topic = :topic AND ie.type = :type')
-     ->orderBy('ie.sort', 'ASC')
-     ->setParameters(['type'=> $type, 'topic' => $topic, 'compilationId' => $compilationId]);
+     ->select(['i, c'])
+     ->from('App\Entity\IndexEntry', 'i')
+     ->join('i.compilations', 'comp')
+     ->leftjoin('i.corrections', 'c')
+     ->where('comp.id = :compilationId AND i.topic = :topic AND i.type = :type AND (c IS NULL OR c.compilation = :compilationId)') //  . ($page ? ' AND (c IS NULL OR c.compilationPage LIKE :page)' : '')
+     ->orderBy('i.sort', 'ASC')
+     ->setParameters($parameters);
     return $queryB->getQuery()->getResult();
   }
-  private function getCorrectionList($compilationId, $search){
+  private function getCorrectionList($compilationId, $search, $page){
     $entityManager = $this->getDoctrine()->getManager();
     $repository = $entityManager->getRepository(Correction::class);
+    $parameters = ['compilationId' => $compilationId];
+    if($search){
+      $parameters['search'] = '%' . $search . '%';
+    }
+    if($page){
+      $parameters['page'] = '%' . $page . '%';
+    }
 
     $queryB = $entityManager->createQueryBuilder()
      ->select(['c', 'e'])
      ->from('App\Entity\Correction', 'c')
      ->join('c.edition', 'e')
-     ->where('c.compilation = :compilationId' . ($search ? ' AND c.description LIKE :search' : ''))
+     ->where('c.compilation = :compilationId' . ($search ? ' AND c.description LIKE :search' : '') . ($page ? ' AND c.compilationPage LIKE :page' : ''))
      ->orderBy('c.sort', 'ASC')
-     ->setParameters($search ? ['compilationId' => $compilationId, 'search' => '%' . $search . '%'] : ['compilationId' => $compilationId]);
+     ->setParameters($parameters);
     return $queryB->getQuery()->getResult();
   }
 
