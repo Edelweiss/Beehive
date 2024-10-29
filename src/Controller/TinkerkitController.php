@@ -32,7 +32,7 @@ class TinkerkitController extends BeehiveController{
         $entityManager->persist($indexEntry);
         $entityManager->flush();
       }
-      return $this->redirect($this->generateUrl('PapyrillioBeehive_IndexEntryManageAssignments', ['compilationId' => $compilationId, 'type' => $type, 'topic' => $topic, 'search' => $search, 'page' => $page]));
+      return $this->redirect($this->generateUrl('PapyrillioBeehive_IndexEntryManageAssignments', ['compilationId' => $compilationId, 'type' => $type, 'topic' => $topic, 'search' => ($page && !$search ? '_' : $search), 'page' => $page]));
     }
     return $this->redirect($this->generateUrl('PapyrillioBeehive_IndexEntryManageAssignments'));
   }
@@ -60,7 +60,7 @@ class TinkerkitController extends BeehiveController{
         $entityManager->persist($indexEntry);
         $entityManager->flush();
       }
-      return $this->redirect($this->generateUrl('PapyrillioBeehive_IndexEntryManageAssignments', ['compilationId' => $compilationId, 'type' => $type, 'topic' => $topic, 'search' => $search, 'page' => $page]));
+      return $this->redirect($this->generateUrl('PapyrillioBeehive_IndexEntryManageAssignments', ['compilationId' => $compilationId, 'type' => $type, 'topic' => $topic, 'search' => ($page && !$search ? '_' : $search), 'page' => $page]));
     }
     return $this->redirect($this->generateUrl('PapyrillioBeehive_IndexEntryManageAssignments'));
   }

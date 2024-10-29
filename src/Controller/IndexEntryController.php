@@ -23,8 +23,8 @@ class IndexEntryController extends BeehiveController{
 
     if($compilationId){
       $query = $entityManager->createQuery('
-        SELECT i, c, comp FROM App\Entity\IndexEntry i
-        JOIN i.corrections c LEFT JOIN i.compilations comp WHERE i.type = :type AND c.compilation = :compilationId ORDER BY i.sort');
+        SELECT i, c, comp, e FROM App\Entity\IndexEntry i
+        JOIN i.corrections c LEFT JOIN i.compilations comp LEFT JOIN c.edition e WHERE i.type = :type AND c.compilation = :compilationId ORDER BY i.sort');
       $parameters = ['type' => $type, 'compilationId' => $compilationId];
       $query->setParameters($parameters);
       $indexEntries = $query->getResult();
