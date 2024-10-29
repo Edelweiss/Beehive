@@ -557,3 +557,16 @@ div#indexEntryMangager div#correctionList {
 
     background-color: grey;
   }
+
+  span.indexEntrySelected,
+  li.correctionSelected {
+    color: green;
+  }
+
+  span.release {
+    font-weight: bold;
+    color: red;
+    cursor: pointer;
+    border: solid 1px red;
+    padding: 0 2px 0 2px;
+  }

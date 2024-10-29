@@ -105,6 +105,15 @@ class IndexEntry
         $this->corrections[] = $correction;
     }
 
+    public function removeCorrection(\App\Entity\Correction $correction)
+    {
+        if (!$this->corrections->contains($correction)) {
+            return;
+        }    
+        $this->corrections->removeElement($correction);
+        $correction->removeIndexEntry($this);
+    }
+
     public function getCorrections()
     {
         return $this->corrections;

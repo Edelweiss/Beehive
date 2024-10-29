@@ -9,7 +9,66 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TinkerkitController extends BeehiveController{
 
+  public function indexEntryAssign(): Response {
+    if ($this->request->getMethod() == 'POST') {
+      // PARAMETERS
+      $indexEntryId = $this->getParameter('indexEntryId');
+      $correctionId = $this->getParameter('correctionId');
+      
+      $compilationId = $this->getParameter('compilationId');
+      $type          = $this->getParameter('type');
+      $topic         = $this->getParameter('topic');
+      $search        = $this->getParameter('search');
+      $page          = $this->getParameter('page');
+
+      $entityManager = $this->getDoctrine()->getManager();
+      $repositoryI = $entityManager->getRepository(IndexEntry::class);
+      $repositoryC = $entityManager->getRepository(Correction::class);
+      $indexEntry = $repositoryI->findOneBy(['id' => $indexEntryId]);
+      $correction = $repositoryC->findOneBy(['id' => $correctionId]);
+      if($indexEntry && $correction){
+        $indexEntry->addCorrection($correction);
+        //$correction->addIndexEntry();
+        $entityManager->persist($indexEntry);
+        $entityManager->flush();
+      }
+      return $this->redirect($this->generateUrl('PapyrillioBeehive_IndexEntryManageAssignments', ['compilationId' => $compilationId, 'type' => $type, 'topic' => $topic, 'search' => $search, 'page' => $page]));
+    }
+    return $this->redirect($this->generateUrl('PapyrillioBeehive_IndexEntryManageAssignments'));
+  }
+
+  public function indexEntryRelease(): Response {
+    if ($this->request->getMethod() == 'POST') {
+      // PARAMETERS
+      $indexEntryId = $this->getParameter('releaseIndexEntryId');
+      $correctionId = $this->getParameter('releaseCorrectionId');
+      
+      $compilationId = $this->getParameter('compilationId');
+      $type          = $this->getParameter('type');
+      $topic         = $this->getParameter('topic');
+      $search        = $this->getParameter('search');
+      $page          = $this->getParameter('page');
+
+      $entityManager = $this->getDoctrine()->getManager();
+      $repositoryI = $entityManager->getRepository(IndexEntry::class);
+      $repositoryC = $entityManager->getRepository(Correction::class);
+      $indexEntry = $repositoryI->findOneBy(['id' => $indexEntryId]);
+      $correction = $repositoryC->findOneBy(['id' => $correctionId]);
+      if($indexEntry && $correction){
+        $indexEntry->removeCorrection($correction);
+        //$correction->addIndexEntry();
+        $entityManager->persist($indexEntry);
+        $entityManager->flush();
+      }
+      return $this->redirect($this->generateUrl('PapyrillioBeehive_IndexEntryManageAssignments', ['compilationId' => $compilationId, 'type' => $type, 'topic' => $topic, 'search' => $search, 'page' => $page]));
+    }
+    return $this->redirect($this->generateUrl('PapyrillioBeehive_IndexEntryManageAssignments'));
+  }
+
   public function manageIndexEntryAssignments($compilationId, $type, $topic, $search = null, $page = null): Response {
+    if($search == '_'){
+      $search = null;
+    }
     return $this->render('tinkerkit/manageIndexEntryAssignments.html.twig', [
       'compilationId'   => $compilationId, 'type' => $type, 'topic' => $topic, 'search' => $search, 'page' => $page,
       'compilationList' => $this->getCompilationList(),

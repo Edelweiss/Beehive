@@ -279,6 +279,14 @@ PapyrillioBeehive_IndexEntryManageAssignments:
         search: null
         page: null
 
+PapyrillioBeehive_IndexEntryManageAssignments_assign:
+    path:  /tinkerkit/indexEntry/assign
+    controller: App\Controller\TinkerkitController::indexEntryAssign
+
+PapyrillioBeehive_IndexEntryManageAssignments_release:
+    path:  /tinkerkit/indexEntry/release
+    controller: App\Controller\TinkerkitController::indexEntryRelease
+
 # Apiary
 
 PapyrillioBeehive_Apiary:

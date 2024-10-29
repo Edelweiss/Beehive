@@ -28,6 +28,6 @@
   <label for="topic">Seite:</label>
   <input id="page" name="page" type="text" value="{{ page }}"/>
 
-  <input type="submit" value="Daten laden" onClick="window.location = '{{ path('PapyrillioBeehive_IndexEntryManageAssignments', {}) }}' + '/' + $('#compilationId').val() + '/' + $('#type').val() + '/' + $('#topic').val() + '/' + ($('#search').val() ? $('#search').val() : '_') + '/' + $('#page').val(); return false;"/>
+  <input type="submit" value="Daten laden" onClick="window.location = '{{ path('PapyrillioBeehive_IndexEntryManageAssignments', {}) }}' + '/' + $('#compilationId').val() + '/' + $('#type').val() + '/' + $('#topic').val() + '/' + (!$('#search').val() && $('#page').val() ? '_' : $('#search').val()) + '/' + $('#page').val(); return false;"/>
 </p>
 </form>

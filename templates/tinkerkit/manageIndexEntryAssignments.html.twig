@@ -4,54 +4,81 @@
 
   {% include 'tinkerkit/_indexEntryAssignmentsParameterControl.html.twig' with {'compilationList': compilationList, 'compilationId': compilationId, 'type': type, 'topicList': topicList, 'topic': topic, 'search': search} %}
 
-  <input type="submit" onclick="window.location='{{ path('PapyrillioBeehive_IndexEntryNew', {'compilationId': compilationId, 'type': type}) }}'" value="zur Ansicht" />
-
-  <form>
+  <form action="{{ path('PapyrillioBeehive_IndexEntryManageAssignments_assign') }}" method="post" autocomplete="off"  onsubmit="javascript: if($('#indexEntryId').val() != '' && $('#correctionId').val() != ''){ return true; } else { return false; }">
     <input name="compilationId" type="hidden" value="{{ compilationId }}" />
     <input name="type" type="hidden" value="{{ type }}" />
     <input name="topic" type="hidden" value="{{ topic }}" />
     <input name="search" type="hidden" value="{{ search }}" />
+    <input name="page" type="hidden" value="{{ page }}" />
 
-    {% set tab = '' %}
-    <div id="indexEntryMangager">
-      <div id="indexEntryList">
-        <ul style="list-style: none;">
-          {% for indexEntry in indexEntryList %}
-            {% if indexEntry.tab != tab %}
-              <li style="margin: 4px 2px 0 2px; font-weight: bold; font-size: bigger; padding: 4px 0 4px 0; border-bottom: 1px solid lightsteelblue">{{ indexEntry.tab }}</li>
-              {% set tab = indexEntry.tab %}
-            {% endif %}
-            <li style="margin: 0 2px 0 2px;">{{ indexEntry.phrase }}
-            {% if indexEntry.corrections|length %}
-              <ul>
-                {% for c in indexEntry.corrections %}
-                  <li>{{ c.description}}, S. {{ c.compilationPage }}</li>
-                {% endfor %}
-              </ul>
-            {% endif %}
-            </li>
-          {% endfor%}
-        </ul>
-      </div>
+    <input id="indexEntryId" name="indexEntryId" type="hidden" value="" />
+    <input id="correctionId" name="correctionId" type="hidden" value="" />
 
-      {% set editionTitle = '' %}
-      <div id="correctionList">
-        <ul style="list-style: none;">
-          {% for c in correctionList %}
-            {% if c.edition.title != editionTitle %}
-              <li style="margin: 4px 2px 0 2px; font-weight: bold; font-size: bigger; padding: 4px 0 4px 0; border-bottom: 1px solid lightsteelblue">{{ c.edition.title }}</li>
-              {% set editionTitle = c.edition.title%}
-            {% endif %}
-            <li title="{{ c.edition.title }} {{ c.text }} {{ c.position }} (S. {{ c.compilationPage }})">{{ c.description }}</li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
-
+    <input type="submit" value="Zuweisung vornehmen" />
   </form>
 
-  <br class="clear"/>
+  <div style="display: none;">
+    <form action="{{ path('PapyrillioBeehive_IndexEntryManageAssignments_release') }}" method="post" autocomplete="off">
+        <input name="compilationId" type="hidden" value="{{ compilationId }}" />
+        <input name="type" type="hidden" value="{{ type }}" />
+        <input name="topic" type="hidden" value="{{ topic }}" />
+        <input name="search" type="hidden" value="{{ search }}" />
+        <input name="page" type="hidden" value="{{ page }}" />
+
+        <input id="releaseIndexEntryId" name="releaseIndexEntryId" type="text" value="" />
+        <input id="releaseCorrectionId" name="releaseCorrectionId" type="text" value="" />
+
+        <input id="release" class="release" type="submit" value="Zuweisung aufheben" />
+    </form>
+  </div>
+
+  {% set tab = '' %}
+  <div id="indexEntryMangager">
+    <div id="indexEntryList">
+      <ul style="list-style: none;">
+        {% for indexEntry in indexEntryList %}
+          {% if indexEntry.tab != tab %}
+            <li style="margin: 4px 2px 0 2px; font-weight: bold; font-size: bigger; padding: 4px 0 4px 0; border-bottom: 1px solid lightsteelblue">{{ indexEntry.tab }}</li>
+            {% set tab = indexEntry.tab %}
+          {% endif %}
+          <li style="margin: 0 2px 0 2px;"><span id="i_{{ indexEntry.id }}" class="indexEntry">{{ indexEntry.phrase }}</span>
+          {% if indexEntry.corrections|length %}
+            <ul>
+              {% for c in indexEntry.corrections %}
+                <li>{{ c.description}}, S. {{ c.compilationPage }} <span id="i_{{ indexEntry. id }}_c_{{ c.id }}" class="release">x</span></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          </li>
+        {% endfor%}
+      </ul>
+    </div>
+
+    {% set editionTitle = '' %}
+    <div id="correctionList">
+      <ul style="list-style: none;">
+        {% for c in correctionList %}
+          {% if c.edition.title != editionTitle %}
+            <li style="margin: 4px 2px 0 2px; font-weight: bold; font-size: bigger; padding: 4px 0 4px 0; border-bottom: 1px solid lightsteelblue">{{ c.edition.title }}</li>
+            {% set editionTitle = c.edition.title%}
+          {% endif %}
+          <li id="c_{{ c.id }}" class="correction" title="{{ c.edition.title }} {{ c.text }} {{ c.position }} (S. {{ c.compilationPage }})">{{ c.description }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+
+
+<br class="clear"/>
+
+<input type="submit" onclick="window.location='{{ path('PapyrillioBeehive_IndexEntryNew', {'compilationId': compilationId, 'type': type}) }}'" value="zur Ansicht" />
+
   
 
 {% endblock %}
 
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('js/tinkerkit.js') }}" type="text/javascript"></script>
+{% endblock %}

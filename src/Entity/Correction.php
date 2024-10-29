@@ -648,6 +648,14 @@ class Correction
     {
         $this->indexEntries[] = $indexEntries;
     }
+    public function removeIndexEntry(\App\Entity\IndexEntry $indexEntry)
+    {
+        if (!$this->indexEntries->contains($indexEntry)) {
+            return;
+        }    
+        $this->indexEntries->removeElement($indexEntry);
+        $indexEntry->removeCorrection($this);
+    }
     public function getIndexEntries()
     {
         return $this->indexEntries;
