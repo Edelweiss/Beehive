@@ -124,9 +124,10 @@ class TinkerkitController extends BeehiveController{
     }
 
     $queryB = $entityManager->createQueryBuilder()
-     ->select(['c', 'e'])
+     ->select(['c', 'e', 'i'])
      ->from('App\Entity\Correction', 'c')
      ->join('c.edition', 'e')
+     ->leftjoin('c.indexEntries', 'i')
      ->where('c.compilation = :compilationId' . ($search ? ' AND c.description LIKE :search' : '') . ($page ? ' AND c.compilationPage LIKE :page' : ''))
      ->orderBy('c.sort', 'ASC')
      ->setParameters($parameters);

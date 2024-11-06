@@ -43,9 +43,9 @@
             </cascade>
         </one-to-many-->
         <many-to-many field="indexEntries" target-entity="IndexEntry">
-            <join-table name="compilation_index_entry">
+            <join-table name="correction_index_entry">
                 <join-columns>
-                    <join-column name="compilation_id" referenced-column-name="id"/>
+                    <join-column name="correction_id" referenced-column-name="id"/>
                 </join-columns>
                 <inverse-join-columns>
                     <join-column name="index_entry_id" referenced-column-name="id"/>

@@ -314,7 +314,7 @@ class CorrectionController extends BeehiveController{
     $formTask = $this->createForm(TaskType::class, $task);
 
     $index = new IndexEntry();
-    $index->setCorrection($this->correction);
+    $index->addCorrection($this->correction);
     $formIndex = $this->createForm(IndexEntryType::class, $index);
     
 

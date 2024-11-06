@@ -62,7 +62,16 @@
             <li style="margin: 4px 2px 0 2px; font-weight: bold; font-size: bigger; padding: 4px 0 4px 0; border-bottom: 1px solid lightsteelblue">{{ c.edition.title }}</li>
             {% set editionTitle = c.edition.title%}
           {% endif %}
-          <li id="c_{{ c.id }}" class="correction" title="{{ c.edition.title }} {{ c.text }} {{ c.position }} (S. {{ c.compilationPage }})">{{ c.description }}</li>
+          <li>
+            <span id="c_{{ c.id }}" class="correction" title="{{ c.edition.title }} {{ c.text }} {{ c.position }} (S. {{ c.compilationPage }})">{{ c.description }} {{ c.indexEntries|length }}</span> <a href="{{ path('PapyrillioBeehive_CorrectionShow', {'id': c.id}) }}" title="edit">✎</a>
+            {% if c.indexEntries|length %}
+              <ul>
+                {% for ie in c.indexEntries %}
+                  <li>{{ ie.phrase }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
         {% endfor %}
       </ul>
     </div>

@@ -102,7 +102,7 @@
   <div id="newIndex" title="Indexeintrag vornehmen">
     {{ form_start(formIndex, {'attr': {'id': 'indexNew', 'class': 'new', 'action': path('PapyrillioBeehive_IndexNew')}}) }}
       {{ form_widget(formIndex) }}
-      <input type="hidden" required="required" id="correction_id" name="correction_id" value="{{ formIndex.vars.value.correction.id }}" />
+      <input type="hidden" required="required" id="correction_id" name="correction_id" value="{{ correction.id }}" />
     </form>
   </div>
 

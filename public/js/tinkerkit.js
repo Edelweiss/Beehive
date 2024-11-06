@@ -9,13 +9,13 @@ $('span.indexEntry').click(function(event){
     }
 });
 
-$('li.correction').click(function(event){
+$('span.correction').click(function(event){
     if($(this).hasClass('correctionSelected')){
         $('#correctionId').val('');
         $(this).removeClass('correctionSelected');
         } else {
         $('#correctionId').val($(this).attr('id').replace('c_', ''));
-        $('li.correctionSelected').removeClass('correctionSelected');
+        $('span.correctionSelected').removeClass('correctionSelected');
         $(this).addClass('correctionSelected');
         }
 });

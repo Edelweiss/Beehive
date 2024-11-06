@@ -107,9 +107,9 @@ class Correction
 
     public function __construct()
     {
-        $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tasks           = new \Doctrine\Common\Collections\ArrayCollection();
         $this->registerEntries = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->indexEntries = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->indexEntries    = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = self::STATUS_UNCHECKED;
         $this->creator = 'system';
         $this->sort = $this->sortSystem = '';
@@ -644,21 +644,21 @@ class Correction
         return $this->edition;
     }
     private $indexEntries;
-    public function addIndexEntry(\App\Entity\IndexEntry $indexEntries)
+    public function addIndexEntry(\App\Entity\IndexEntry $indexEntry)
     {
-        $this->indexEntries[] = $indexEntries;
+        $this->indexEntries[] = $indexEntry;
     }
     public function removeIndexEntry(\App\Entity\IndexEntry $indexEntry)
     {
-        if (!$this->indexEntries->contains($indexEntry)) {
-            return;
-        }    
-        $this->indexEntries->removeElement($indexEntry);
-        $indexEntry->removeCorrection($this);
+      if(!$this->indexEntries->contains($indexEntry)) {
+        return;
+      }    
+      $this->indexEntries->removeElement($indexEntry);
+      $indexEntry->removeCorrection($this);
     }
     public function getIndexEntries()
     {
-        return $this->indexEntries;
+      return $this->indexEntries;
     }
     private $compilationPage;
     public function setCompilationPage($compilationPage)

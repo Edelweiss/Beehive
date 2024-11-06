@@ -559,7 +559,7 @@ div#indexEntryMangager div#correctionList {
   }
 
   span.indexEntrySelected,
-  li.correctionSelected {
+  span.correctionSelected {
     color: green;
   }
 
