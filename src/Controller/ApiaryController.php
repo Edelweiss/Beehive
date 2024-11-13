@@ -14,7 +14,7 @@ use DateTime;
 
 class ApiaryController extends BeehiveController{
 
-  protected static $TYPES = array('tm' => 'r.tm', 'hgv' => 'r.hgv', 'ddb' => 'r.ddb', 'biblio' => 'c.source', 'bl' => 'c2.volume', 'register' => 'r.id', 'boep' => 'c2.title', 'collection' => 'c2.collection', 'volume' => 'r.ddb');
+  protected static $TYPES = ['tm' => 'r.tm', 'hgv' => 'r.hgv', 'ddb' => 'r.ddb', 'biblio' => 'c.source', 'bl' => 'c2.volume', 'register' => 'r.id', 'boep' => 'c2.title', 'collection' => 'c2.collection', 'volume' => 'r.ddb', 'search' => 'c.description'];
 
   public function index(): Response{
     return $this->render('apiary/index.html.twig');
@@ -63,6 +63,9 @@ class ApiaryController extends BeehiveController{
   private function makeTitle ($type, $id, $corrections){
     if($type === 'boep'){
       return $id;
+    }
+    if($type === 'search'){
+      return 'Suchergebnisse für "' . $id . '"';
     }
     if($type === 'bl'){
       if($id == 2){
@@ -122,6 +125,9 @@ class ApiaryController extends BeehiveController{
       }
       $where = self::$TYPES[$type] . ' LIKE :id';
       $id .= '%';
+    } elseif ($type === 'search'){
+      $where = self::$TYPES[$type] . ' LIKE :id';
+      $id = '%' . $id . '%';
     }
     $parameters = array('id' => $id);
 

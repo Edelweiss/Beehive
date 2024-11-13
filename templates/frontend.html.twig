@@ -93,7 +93,7 @@
 <div class="middler">
 	<div id="search" class="container_12">
   	  <form id="quicksearch" autocomplete="off" onsubmit="return false;">
-	    <input id="quicksearch_id" type="text" size="60" value="TM, HGV, DDB-Hybrid oder BL-Bandnummer eingeben" onclick="if(this.value == 'TM, HGV, DDB-Hybrid oder BL-Bandnummer eingeben'){ this.value=''; };" autocomplete="false"/>
+	    <input id="quicksearch_id" type="text" size="60" value="TM, HGV, DDB-Hybrid oder BL-Bandnummer eingeben" onclick="if($(this).val() == 'TM, HGV, DDB-Hybrid oder BL-Bandnummer eingeben'){ $(this).val(''); };" autocomplete="false"/>
 	    <input id="quicksearch_button" type="button" value="Schnellsuche" onlick="return null;" />
 	  </form>
 	</div>
@@ -135,7 +135,10 @@
                 url += 'ddb';
               } else if (id.match(/^.+;.+;?$/)){
                 url += 'volume';
-              } else if (id.match(/^[IVXLCDM]+$/)){
+              }  else if (id.match(/^".+"$/)){
+                  url += 'search';
+                  id = id.replaceAll('"', '');
+              }else if (id.match(/^[IVXLCDM]+$/)){
                 id = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX'].indexOf(id);
                 if(id && id > 0){
                   url += 'bl';
@@ -145,6 +148,7 @@
               } else {
                 valid = false;
               }
+
               if(valid){
                 url += '/' + id;
                 window.location.href = url;

@@ -15,7 +15,7 @@
       {% if compilationsOfInterest|length > 1  %}, {% endif %}<a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'collection', 'id': 'BOEP' }) }}" title="Bulletin of Online Emendations to Papyri">BOEP</a>
     {% endif %}
 
-    {% if type != 'bl' and corrections|length and corrections|first.registerEntries|length %}
+    {% if type not in ['bl', 'search'] and corrections|length and corrections|first.registerEntries|length %}
       {% set r = corrections|first.registerEntries|first %}
       <br />
       Weitere identifier und Links:
@@ -48,7 +48,7 @@
       Editionen für BOEP doc.
     {% elseif type == 'collection' and id == 'dclp'  %}
       Editionen für BOEP lit.
-    {% else %}
+    {% elseif type != 'search' %}
       Editionen in
       <br />
       {% if type == 'collection' %}
@@ -63,31 +63,33 @@
 {% endblock %}
 
 {% block lefty %}
-<ul>
-  {% if type == 'boep' and id != 'Bulletin of Online Emendations to Papyri' %}
-    {% set collection = '' %}
+{% if type != 'search' %}
+  <ul>
+    {% if type == 'boep' and id != 'Bulletin of Online Emendations to Papyri' %}
+      {% set collection = '' %}
+      {% for c in corrections %}
+        {% set currentCollection = c.registerEntries|length and c.registerEntries|first.dclp|length ? 'DCLP' : 'DDB' %}
+          {% if currentCollection != collection %}
+            <li><a href="#{{ currentCollection }}">{{ currentCollection }}</a></li>
+            {% set collection = currentCollection %}
+          {% endif %}
+      {% endfor %}
+      <hr />
+    {% endif %}
+
+    {% set edition = '' %}
     {% for c in corrections %}
-      {% set currentCollection = c.registerEntries|length and c.registerEntries|first.dclp|length ? 'DCLP' : 'DDB' %}
-        {% if currentCollection != collection %}
-          <li><a href="#{{ currentCollection }}">{{ currentCollection }}</a></li>
-          {% set collection = currentCollection %}
+        {% if c.edition.title != edition %}
+          <li>
+            <a href="#{{ c.edition.title|replace({' ': '_', '.': ''}) }}" class="edition">
+              {{ c.edition.title }}
+            </a>
+          </li>
+          {% set edition = c.edition.title %}
         {% endif %}
     {% endfor %}
-    <hr />
-  {% endif %}
-
-  {% set edition = '' %}
-  {% for c in corrections %}
-      {% if c.edition.title != edition %}
-        <li>
-          <a href="#{{ c.edition.title|replace({' ': '_', '.': ''}) }}" class="edition">
-            {{ c.edition.title }}
-          </a>
-        </li>
-        {% set edition = c.edition.title %}
-      {% endif %}
-  {% endfor %}
-</ul>
+  </ul>
+{% endif %}
 {% endblock %}
 
 
