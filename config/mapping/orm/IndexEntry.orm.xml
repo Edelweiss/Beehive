@@ -9,8 +9,8 @@
         <field name="type" type="string" length="64"/>
         <field name="topic" type="string" length="64"/>
         <field name="tab" type="string" length="255"/>
-        <field name="papy_new" type="integer"/>
-        <field name="greek_new" type="integer"/>
+        <field name="papyNew" column="papy_new" type="integer"/>
+        <field name="greekNew" column="greek_new" type="integer"/>
         <field name="lemma" type="string" length="255"/>
         <field name="sort" type="string" length="255"/>
         <field name="phrase" type="text"/>

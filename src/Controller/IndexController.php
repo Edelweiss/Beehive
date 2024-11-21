@@ -19,7 +19,7 @@ class IndexController extends BeehiveController{
       
       if($correction){
         $index = new IndexEntry();
-        $index->setCorrection($correction);
+        $index->addCorrection($correction);
 
         $form = $this->createForm(IndexEntryType::class, $index);
         $form->handleRequest($this->request);
@@ -67,7 +67,7 @@ class IndexController extends BeehiveController{
     $this->repository = $this->entityManager->getRepository(IndexEntry::class);
 
     $this->index = $this->repository->findOneBy(['id' => $id]);
-    
+
     if(!$this->index){
       throw $this->createNotFoundException('Index #' . $id . ' does not exist');
     }

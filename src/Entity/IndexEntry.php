@@ -11,8 +11,8 @@ class IndexEntry
     private $type;
     private $topic;
     private $tab;
-    private $papy_new;
-    private $greek_new;
+    private $papyNew;
+    private $greekNew;
     private $lemma;
     private $sort;
     private $phrase;
@@ -50,7 +50,7 @@ class IndexEntry
         return $this->topic;
     }
 
-    public function setTab($topic)
+    public function setTab($tab)
     {
         $this->tab = $tab;
     }
@@ -62,12 +62,22 @@ class IndexEntry
 
     public function setPapyNew($papyNew)
     {
-        $this->papy_new = $papyNew;
+        $this->papyNew = $papyNew;
     }
 
     public function getPapyNew()
     {
-        return $this->papy_new;
+        return $this->papyNew;
+    }
+
+    public function setGreekNew($greekNew)
+    {
+        $this->greekNew = $greekNew;
+    }
+
+    public function getGreekNew()
+    {
+        return $this->greekNew;
     }
 
     public function setLemma($lemma)

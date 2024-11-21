@@ -216,7 +216,7 @@ PapyrillioBeehive_TaskUpdate:
     path:  /task/update/{id}
     controller: App\Controller\TaskController::update 
 
-# Index
+# Index / IndexEntry
 
 PapyrillioBeehive_IndexDelete:
     path:  /index/delete/{id}
@@ -233,18 +233,6 @@ PapyrillioBeehive_IndexNew:
 PapyrillioBeehive_IndexUpdate:
     path:  /index/update/{id}
     controller: App\Controller\IndexController::update 
-
-# System
-
-PapyrillioBeehive_SystemSort:
-    path:  /system/sort/{editionId}
-    controller: App\Controller\SystemController::sort
-    defaults:
-        editionId: 0 
-
-PapyrillioBeehive_SystemCheckSort:
-    path:  /system/checkSort/{id}
-    controller: App\Controller\SystemController::checkSort
 
 # IndexEntry
 
@@ -286,6 +274,18 @@ PapyrillioBeehive_IndexEntryManageAssignments_assign:
 PapyrillioBeehive_IndexEntryManageAssignments_release:
     path:  /tinkerkit/indexEntry/release
     controller: App\Controller\TinkerkitController::indexEntryRelease
+
+# System
+
+PapyrillioBeehive_SystemSort:
+    path:  /system/sort/{editionId}
+    controller: App\Controller\SystemController::sort
+    defaults:
+        editionId: 0 
+
+PapyrillioBeehive_SystemCheckSort:
+    path:  /system/checkSort/{id}
+    controller: App\Controller\SystemController::checkSort
 
 # Apiary
 
