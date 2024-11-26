@@ -20,7 +20,7 @@ class IndexEntryType extends AbstractType
             ->add('tab', ChoiceType::class, ['label' => 'Gruppe', 'choices' => self::getIndexTabs()])
             ->add('lemma', TextType::class, ['label' => 'Lemma'])
             ->add('papyNew', CheckboxType::class, ['label' => 'Papy neu'])
-            ->add('greekNew', CheckboxType::class, ['label' => 'Grichisch neu'])
+            ->add('greekNew', CheckboxType::class, ['label' => 'Griechisch neu'])
             ->add('sort', TextType::class, ['label' => 'Sortierung'])
             ->add('phrase', TextareaType::class, ['label' => 'Beschreibung'])
         ;

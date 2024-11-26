@@ -63,7 +63,7 @@
       {% for i in list %}
         <li id="{{ i.id }}" class="phrase">
           <span class="phrase">{{ i.phrase }}</span>{% if not compilation and i.compilations|length > 0 %}<span class="biblio">,&nbsp;{% for c in i.compilations %}{% if loop.first == false  %}, {% endif %}<a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'bl', 'id': c.volume }) }}" title="{{ c.short }}">{{ c.short|replace({' ' : '&nbsp;'})|raw }}</a>{% endfor %}</span>
-          {% else %}<span class="biblio">,&nbsp;S. {% for c in i.corrections %}{% if not loop.first %}, {% endif %}{{ c.compilationPage }},&nbsp;<span title="{{ c.description }}">{{ c.edition.title }}&nbsp;{{ c.text }}&nbsp;{{ c.position }}</span>{% endfor %}</span>
+          {% else %}<span class="biblio">,&nbsp;S. {% for c in i.corrections %}{% if not loop.first %}; {% endif %}{{ c.compilationPage }},&nbsp;<span title="{{ c.description }}">{{ c.edition.title }}&nbsp;{{ c.text }}&nbsp;{{ c.position }}</span>{% endfor %}</span>
           {% endif %}
         </li>
       {% endfor %}
