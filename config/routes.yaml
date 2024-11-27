@@ -178,6 +178,10 @@ PapyrillioBeehive_CorrectionLinkSnippet:
 
 # Edition
 
+PapyrillioBeehive_Editions:
+    path:  /editions
+    controller: App\Controller\EditionController::listAll
+
 PapyrillioBeehive_EditionList:
     path:  /edition/list
     controller: App\Controller\EditionController::list 

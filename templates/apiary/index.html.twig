@@ -26,43 +26,45 @@ Bestände durchsuchen
     </select>
   </p>
 
-  <p>
-    <label for="bl">BL im Leidener Format</label>
-    <select id="report/leiden" class="flyTo">
-      <option value="1">I</option>
-      <option value="2">II</option>
-      <option value="3">III</option>
-      <option value="4">IV</option>
-      <option value="5">V</option>
-      <option value="6">VI</option>
-      <option value="7">VII</option>
-      <option value="8">VIII</option>
-      <option value="9">IX</option>
-      <option value="10">X</option>
-      <option value="11">XI</option>
-      <option value="12">XII</option>
-      <option value="13" selected="selected">XIII</option>
-    </select>
-  </p>
+  {% if app.user %}
+    <p>
+      <label for="bl">BL im Leidener Format</label>
+      <select id="report/leiden" class="flyTo">
+        <option value="1">I</option>
+        <option value="2">II</option>
+        <option value="3">III</option>
+        <option value="4">IV</option>
+        <option value="5">V</option>
+        <option value="6">VI</option>
+        <option value="7">VII</option>
+        <option value="8">VIII</option>
+        <option value="9">IX</option>
+        <option value="10">X</option>
+        <option value="11">XI</option>
+        <option value="12">XII</option>
+        <option value="13" selected="selected">XIII</option>
+      </select>
+    </p>
 
-  <p>
-    <label for="bl">BL nach Editionen</label>
-    <select id="report/overview" class="flyTo">
-      <option value="1">I</option>
-      <option value="2">II</option>
-      <option value="3">III</option>
-      <option value="4">IV</option>
-      <option value="5">V</option>
-      <option value="6">VI</option>
-      <option value="7">VII</option>
-      <option value="8">VIII</option>
-      <option value="9">IX</option>
-      <option value="10">X</option>
-      <option value="11">XI</option>
-      <option value="12">XII</option>
-      <option value="13" selected="selected">XIII</option>
-    </select>
-  </p>
+    <p>
+      <label for="bl">BL nach Editionen</label>
+      <select id="report/overview" class="flyTo">
+        <option value="1">I</option>
+        <option value="2">II</option>
+        <option value="3">III</option>
+        <option value="4">IV</option>
+        <option value="5">V</option>
+        <option value="6">VI</option>
+        <option value="7">VII</option>
+        <option value="8">VIII</option>
+        <option value="9">IX</option>
+        <option value="10">X</option>
+        <option value="11">XI</option>
+        <option value="12">XII</option>
+        <option value="13" selected="selected">XIII</option>
+      </select>
+    </p>
+  {% endif %}
 
   <p>
     <label for="boep">BOEP nach Ausgaben</label>
@@ -85,32 +87,38 @@ Bestände durchsuchen
 
   <p>
     <label for="tm" title="Beispiel: 19768">TM-Nummer</label>
-    <input id="tm" type="text" class="flyTo" />
+    <input id="tm" type="text" class="flyTo greyText" value="Beispiel: 19768" autocomplete="off"
+    title="Hier kann eine Trismegistos-Nummer angegeben werden, wie man sie auf Trismegistos.org findet und die auch auch auf Papyri.info Verwendung findet." />
   </p>
 
   <p>
-    <label for="hgv" title="Beispiel: 34844">HGV-Nummer</label>
-    <input id="hgv" type="text" class="flyTo" />
+    <label for="hgv" title="Beispiel: 44881zb">HGV-Nummer</label>
+    <input id="hgv" type="text" class="flyTo greyText" value="Beispiel: 44881zb" autocomplete="off"
+    title="HGV-Nummern sind Trismegistos-Nummern mit einem Zusatz, falls auf ein bestimmtes Schriftstück Bezug genommen wird, und werden in Form von Kleinbuchstaben angegeben. Zum Beispiel »44881zb« statt »44881«." />
   </p>
 
   <p>
     <label for="biblio" title="Beispiel: 73664">Papyri.info-Biblio-Id</label>
-    <input id="biblio" type="text" class="flyTo" />
+    <input id="biblio" type="text" class="flyTo greyText" value="Beispiel: 73664" autocomplete="off"
+    title="Blablabla" />
   </p>
 
   <p>
-    <label for="ddb" title="Beispiel: p.mil;2;64">DDB-Id</label>
-    <input id="ddb" type="text" />
+    <label for="ddb" title="Beispiel: p.mil;2;64">DDB-Hybrid</label>
+    <input id="ddb" type="text" class="flyTo greyText" value="Beispiel: p.mil;2;64" autocomplete="off"
+    title="Blablabla" />
   </p>
 
   <p>
     <label for="volume" title="Beispiel: p.mil;1;">Band/Editie</label>
-    <input id="volume" type="text" class="flyTo" />
+    <input id="volume" type="text" class="flyTo greyText" value="Beispiel: p.mil;1;" autocomplete="off"
+    title="Blablabla" />
   </p>
 
   <p>
     <label for="search" title="Beispiel: Codices Latini">Suche</label>
-    <input id="search" type="text" class="flyTo" />
+    <input id="search" type="text" class="flyTo greyText" value="Beispiel: Codices Latini" autocomplete="off"
+    title="Blablabla" />
   </p>
   
   <p>
@@ -119,13 +127,14 @@ Bestände durchsuchen
     <br />
     <h4>Beispiele für verschiedene Filter und Formate:</h4>
     <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'tm', 'id': '19768'}) }}">TM 19768</a>,
-    <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'hgv', 'id': '34844'}) }}">HGV 34844</a>,
+    <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'hgv', 'id': '44881zb'}) }}">HGV 44881zb</a>,
     <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'ddb', 'id': 'p.mil;2;64'}) }}">DDB p.mil;2;64</a>,
     <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'biblio', 'id': '73664'}) }}">Biblio 73664</a>,
     <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'bl', 'id': 13}) }}">BL XIII</a>,
     <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'boep', 'id': 'Bulletin of Online Emendations to Papyri 9.1'}) }}">BOEP 9.1</a>,
     <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'volume', 'id': 'p.mil;1;'}) }}">p.mil;1;</a>
     <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'register', 'id': '34237'}) }}">Register 34237</a>
+    <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'search', 'id': 'Codices Latini'}) }}">Search: "Codices Latini"</a>
     <br />
   </p>
 

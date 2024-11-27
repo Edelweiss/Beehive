@@ -9,6 +9,13 @@ use DateTime;
 
 class EditionController extends BeehiveController{
 
+  public function listAll(): Response {
+    $entityManager = $this->getDoctrine()->getManager();
+    $repository = $entityManager->getRepository(Edition::class);
+    $editions = $repository->findAll(['sort' => 'ASC']);
+    return $this->render('edition/listAll.html.twig', ['editions' => $editions]);
+  }
+
   public function list(): Response {
     $entityManager = $this->getDoctrine()->getManager();
     $repository = $entityManager->getRepository(Edition::class);

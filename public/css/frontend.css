@@ -16,7 +16,11 @@ Suche rechts: #e6c294
 */
 
 body {
-    background-color: #f3e4bf;
+    background-color: #c3924f;
+}
+
+.greyText {
+    color: #f3e4bf;
 }
 
 ul,
