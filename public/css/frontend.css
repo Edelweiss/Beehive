@@ -16,7 +16,7 @@ Suche rechts: #e6c294
 */
 
 body {
-    background-color: #c3924f;
+    background-color: #5d4434;
 }
 
 .greyText {
@@ -189,7 +189,7 @@ div#content {
 div#left,
 div#right {
     font-family: Papyrus, Palatino, serif;
-    #background-color: #fefeff;
+    #background-color: pink;
 }
 
 div#topic {
@@ -236,8 +236,8 @@ div#quick1 {
     background-image: url("../images/frontend/quick1.png");
     background-size: contain;
     background-repeat: no-repeat;
-    height: 100px;
-    margin: 100px 0 0 0;
+    height: 80px;
+    margin: 40px 0 0 0;
     padding: 6px 0 0 0;
 }
 
@@ -245,7 +245,7 @@ div#quick2 {
     background-image: url("../images/frontend/quick2.png");
     background-size: contain;
     background-repeat: no-repeat;
-    height: 80px;
+    height: 70px;
     padding: 6px 0 0 0;
 }
 
@@ -257,7 +257,9 @@ div#quick3 {
     padding: 6px 0 0 0;
 }
 
-div.sidebarSection {
+div.sidebarSection,
+div#teaser1,
+div#teaser2 {
     background-color: #fefeff;
     padding: 8px;
     border-radius: 16px;
@@ -265,7 +267,20 @@ div.sidebarSection {
     border: solid 1px #5d4434;
 }
 
-div.sidebarSection h2 {
+div#teaser1,
+div#teaser2 {
+    width: 100px;
+    margin: 0 0 20px 240px;
+}
+
+div#teaser2 {
+    width: 160px;
+    margin: 0 0 20px 210px;
+}
+
+div.sidebarSection h2,
+div#teaser1 h2,
+div#teaser2 h2 {
     font-size: 12pt;
     text-align: left;
     font-weight: normal;
@@ -273,6 +288,10 @@ div.sidebarSection h2 {
     margin: 0;
 }
 
+div#teaser1 h2,
+div#teaser2 h2 {
+    text-align: center;
+}
 
 /* FOOTER / QUICKSEARCH */
 

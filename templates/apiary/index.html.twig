@@ -4,9 +4,14 @@
 Bestände durchsuchen
 {% endblock %}
 
+{% block gamma %}
+Hier können die Bestände nach bestimmten Kriterien gefiltert und in verschiedenen Formaten abgerufen werden.
+{% endblock %}
+
 {% block body %}
-<p>Hier können die Bestände nach bestimmten Kriterien gefiltert und in verschiedenen Formaten abgerufen werden.</p>
 <div class="apiary">
+  <h4>Suche nach Ids und Referenzen</h4>
+  <br />
   <p>
     <label for="bl">BL nach Bänden</label>
     <select id="bl" class="flyTo">
@@ -23,6 +28,15 @@ Bestände durchsuchen
       <option value="11">XI</option>
       <option value="12">XII</option>
       <option value="13" selected="selected">XIII</option>
+    </select>
+  </p>
+
+  <p>
+    <label for="editie">BL-Editionen</label>
+    <select id="editie" class="flyTo" autocomplete="off">
+      {% for edition in editions %}
+        <option value="{{ edition.id }}">{{ edition.title }}</option>
+      {% endfor %}
     </select>
   </p>
 
@@ -115,8 +129,14 @@ Bestände durchsuchen
     title="Blablabla" />
   </p>
 
+  <br/>
+  <br/>
+  <br/>
+  <h4>Freitextsuche im Beschreibungstext der Korrekturen</h4>
+  <br/>
+
   <p>
-    <label for="search" title="Beispiel: Codices Latini">Suche</label>
+    <label for="search" title="Beispiel: Codices Latini">Suchwort</label>
     <input id="search" type="text" class="flyTo greyText" value="Beispiel: Codices Latini" autocomplete="off"
     title="Blablabla" />
   </p>
@@ -126,6 +146,7 @@ Bestände durchsuchen
     <br />
     <br />
     <h4>Beispiele für verschiedene Filter und Formate:</h4>
+    <br/>
     <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'tm', 'id': '19768'}) }}">TM 19768</a>,
     <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'hgv', 'id': '44881zb'}) }}">HGV 44881zb</a>,
     <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'ddb', 'id': 'p.mil;2;64'}) }}">DDB p.mil;2;64</a>,
@@ -134,7 +155,7 @@ Bestände durchsuchen
     <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'boep', 'id': 'Bulletin of Online Emendations to Papyri 9.1'}) }}">BOEP 9.1</a>,
     <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'volume', 'id': 'p.mil;1;'}) }}">p.mil;1;</a>
     <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'register', 'id': '34237'}) }}">Register 34237</a>
-    <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'search', 'id': 'Codices Latini'}) }}">Search: "Codices Latini"</a>
+    <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'search', 'id': 'Codices Latini'}) }}">Suchwort: "Codices Latini"</a>
     <br />
   </p>
 

@@ -6,6 +6,7 @@ use App\Entity\Correction;
 use App\Entity\Log;
 use App\Entity\Compilation;
 use App\Entity\Register;
+use App\Entity\Edition;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,10 +15,13 @@ use DateTime;
 
 class ApiaryController extends BeehiveController{
 
-  protected static $TYPES = ['tm' => 'r.tm', 'hgv' => 'r.hgv', 'ddb' => 'r.ddb', 'biblio' => 'c.source', 'bl' => 'c2.volume', 'register' => 'r.id', 'boep' => 'c2.title', 'collection' => 'c2.collection', 'volume' => 'r.ddb', 'search' => 'c.description'];
+  protected static $TYPES = ['tm' => 'r.tm', 'hgv' => 'r.hgv', 'ddb' => 'r.ddb', 'biblio' => 'c.source', 'bl' => 'c2.volume', 'register' => 'r.id', 'boep' => 'c2.title', 'collection' => 'c2.collection', 'volume' => 'r.ddb', 'editie' => 'c.edition', 'search' => 'c.description'];
 
   public function index(): Response{
-    return $this->render('apiary/index.html.twig');
+    $entityManager = $this->getDoctrine()->getManager();
+    $repository = $entityManager->getRepository(Edition::class);
+    $editions = $repository->findAll(['sort' => 'ASC']);
+    return $this->render('apiary/index.html.twig', ['editions' => $editions]);
   }
 
   private function getCompilationsOfInterest($corrections){
@@ -74,6 +78,9 @@ class ApiaryController extends BeehiveController{
       if(count($corrections)){
         return $corrections[0]->getCompilation()->getShort();
       }
+    }
+    if($type === 'editie' && count($corrections)){
+      return $corrections[0]->getEdition()->getTitle();
     }
     if(\in_array($type, ['tm', 'hgv', 'ddb', 'biblio', 'volume', 'register'])){
       return strtoupper($type) . ' ' . $id;

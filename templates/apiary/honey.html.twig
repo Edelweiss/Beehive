@@ -7,7 +7,6 @@
 {% block gamma %}
   {% if compilationsOfInterest|length and type != 'collection' %}
     Die Inhalte der angezeigten Korrekturen stammen aus den Online-Beständen von
-
     {% for key, coi in compilationsOfInterest %}
       {% if key != 'BOEP'  %}{% if loop.first == false  %}, {% endif %}<a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'bl', 'id': coi.volume }) }}" title="{{ coi.short }}">{{ coi.short|replace({' ' : '&nbsp;'})|raw }}</a>{% endif  %}
     {% endfor %}
@@ -15,7 +14,7 @@
       {% if compilationsOfInterest|length > 1  %}, {% endif %}<a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'collection', 'id': 'BOEP' }) }}" title="Bulletin of Online Emendations to Papyri">BOEP</a>
     {% endif %}
 
-    {% if type not in ['bl', 'search'] and corrections|length and corrections|first.registerEntries|length %}
+    {% if type not in ['bl', 'editie', 'search'] and corrections|length and corrections|first.registerEntries|length %}
       {% set r = corrections|first.registerEntries|first %}
       <br />
       Weitere identifier und Links:
@@ -37,7 +36,7 @@
 {% endblock %}
 
 {% block lefty_title %}
-  {%if corrections|length %}
+  {%if type != 'editie' and corrections|length %}
     {% if type == 'volume' %}
       {{ id }} in
       <br/>
@@ -63,7 +62,7 @@
 {% endblock %}
 
 {% block lefty %}
-{% if type != 'search' %}
+{% if type not in ['editie', 'search'] %}
   <ul>
     {% if type == 'boep' and id != 'Bulletin of Online Emendations to Papyri' %}
       {% set collection = '' %}
@@ -95,7 +94,7 @@
 
 {% block righty_title %}
   {% if corrections|length %}
-    {% if type == 'tm' or type == 'hgv' or type == 'ddb' or type == 'volume' or type == 'biblio' or type == 'register' %}
+    {% if type in ['tm', 'hgv', 'ddb', 'volume', 'biblio', 'register', 'editie'] %}
     {% else %}
     weitere
     {{ corrections|first.compilation.collection }}s
@@ -104,7 +103,7 @@
 {% endblock %}
 
 {% block righty %}
-  {% if type == 'tm' or type == 'hgv' or type == 'ddb' or type == 'volume' or type == 'biblio' or type == 'register' %}
+  {% if type in ['tm', 'hgv', 'ddb', 'volume', 'biblio', 'register', 'editie'] %}
   {% else %}
     <ul>
       {% for c in compilations %}
