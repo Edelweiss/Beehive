@@ -183,23 +183,23 @@ PapyrillioBeehive_Editions:
     controller: App\Controller\EditionController::listAll
 
 PapyrillioBeehive_EditionList:
-    path:  /edition/list
+    path:  /admin/edition/list
     controller: App\Controller\EditionController::list 
 
 PapyrillioBeehive_EditionShow:
-    path:  /edition/show/{id}
+    path:  /admin/edition/show/{id}
     controller: App\Controller\EditionController::show 
 
 PapyrillioBeehive_EditionDelete:
-    path:  /edition/delete/{id}
+    path:  /admin/edition/delete/{id}
     controller: App\Controller\EditionController::delete 
 
 PapyrillioBeehive_EditionNew:
-    path:  /edition/new
+    path:  /admin/edition/new
     controller: App\Controller\EditionController::new 
 
 PapyrillioBeehive_EditionUpdate:
-    path:  /edition/update
+    path:  /admin/edition/update
     controller: App\Controller\EditionController::update 
 
 # Task
