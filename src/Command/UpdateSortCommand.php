@@ -34,12 +34,16 @@ class UpdateSortCommand extends Command
         foreach(explode(',', $input->getOption('editions')) as $editionId){
           $edtionId = intval(trim($editionId));
           if($editionId > 0){
-              echo ' = = = = = = = = = = = = = = = = '  . "\n";
+
               echo '' . $editionId . "\n";
               
               $repository = $this->entityManager->getRepository(Correction::class);
               $corrections = $repository->findBy(['edition' => (string) $editionId]);
-              var_dump($corrections);
+              foreach($corrections as $correction){
+                echo $correction->getId() . "\n";
+              }
+
+
           }
           
         }
