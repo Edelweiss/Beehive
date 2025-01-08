@@ -25,7 +25,7 @@ class UpdateSortCommand extends Command
 
     protected function configure(): void
     {
-        $this->addOption('editions', InputOption::VALUE_REQUIRED, 'e', 'comma separated list of editions whose corrections need an update, such as --editions=2,45,67'); // --editions=2,45,67
+        $this->addOption('editions', 'e', InputOption::VALUE_REQUIRED, 'comma separated list of editions whose corrections need an update, such as --editions=2,45,67'); // --editions=2,45,67
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
