@@ -8,7 +8,7 @@
 <ul style="columns: 4">
   {% for edition in editions %}
   <li>
-  {{ edition.title }}
+  <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'editie', 'id': edition.id}) }}" title="{{ edition.sort }}">{{ edition.title }}</a>
   </li>
   {% endfor %}
 </ul>
