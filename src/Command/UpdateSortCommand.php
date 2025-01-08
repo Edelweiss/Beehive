@@ -32,7 +32,7 @@ class UpdateSortCommand extends Command
     {
         echo ' = = = = = = = = = = = = = = = = '  . "\n";
         foreach(explode(',', $input->getOption('editions')) as $editionId){
-          $edtionId = intval(trim(editionId));
+          $edtionId = intval(trim($editionId));
           if($editionId > 0){
               echo ' = = = = = = = = = = = = = = = = '  . "\n";
               echo '' . $editionId . "\n";
