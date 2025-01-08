@@ -12,7 +12,7 @@ class EditionController extends BeehiveController{
   public function listAll(): Response {
     $entityManager = $this->getDoctrine()->getManager();
     $repository = $entityManager->getRepository(Edition::class);
-    $editions = $repository->findAll(['sort' => 'DESC']);
+    $editions = $repository->findBy([], ['sort' => 'DESC']);
     return $this->render('edition/listAll.html.twig', ['editions' => $editions]);
   }
 
