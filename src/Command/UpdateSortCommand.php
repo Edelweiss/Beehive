@@ -30,9 +30,17 @@ class UpdateSortCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        foreach($input->getOption('editions') as $editionId){
-          echo ' = = = = = = = = = = = = = = = = '  . "\n";
-          echo '' . $editionId . "\n";
+        foreach(explode(',', $input->getOption('editions')) as $editionId){
+          $edtionId = intval(trim(editionId));
+          if($editionId > 0){
+              echo ' = = = = = = = = = = = = = = = = '  . "\n";
+              echo '' . $editionId . "\n";
+              
+              $repository = $this->entityManager->getRepository(Correction::class);
+              $corrections = $repository->findBy(['edition', $editionId], ['sort' => 'ASC']);
+              var_dump($corrections);
+          }
+          
         }
 
 
