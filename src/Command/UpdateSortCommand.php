@@ -44,8 +44,6 @@ class UpdateSortCommand extends Command
           
         }
 
-
-
         //echo str_pad($row, 6, ' ', STR_PAD_LEFT) . ' Zeilen bearbeitet'  . "\n";
 
 	    return Command::SUCCESS;
