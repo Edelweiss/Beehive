@@ -38,7 +38,7 @@ class UpdateSortCommand extends Command
               echo '' . $editionId . "\n";
               
               $repository = $this->entityManager->getRepository(Correction::class);
-              $corrections = $repository->findBy(['edition', $editionId], ['sort' => 'ASC']);
+              $corrections = $repository->findBy(['edition', (string) $editionId], ['sort' => 'ASC']);
               var_dump($corrections);
           }
           
