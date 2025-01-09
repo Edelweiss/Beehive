@@ -33,7 +33,7 @@ class UpdateSortCommand extends Command
       echo ' = = = = = = = = = = = = = = = = '  . "\n";
       $flushCounter = 1;
       foreach($this->getCorrections($input->getOption('editions')) as $correction){
-        echo str_pad($flushCounter, 8, ' ', STR_PAD_LEFT) . ': ' . $correction->getEditionId() . '/' . $correction->getId() . "\n";
+        echo str_pad($flushCounter, 8, ' ', STR_PAD_LEFT) . ': ' . $correction->getId() . "\n";
         $correction->setSortValues();
         $this->entityManager->persist($correction);
 
