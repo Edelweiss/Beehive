@@ -58,7 +58,7 @@ class UpdateSortCommand extends Command
         return $repository->findAll();
       } else if (preg_match('/^\d+(,\d+)*$/', $editions)) {
         
-        return $repository->findBy(['edition' => explode(',', $editions));
+        return $repository->findBy(['edition' => explode(',', $editions)]);
       }
       return [];
     }
