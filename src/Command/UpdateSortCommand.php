@@ -25,34 +25,42 @@ class UpdateSortCommand extends Command
 
     protected function configure(): void
     {
-        $this->addOption('editions', 'i', InputOption::VALUE_REQUIRED, 'comma separated list of editions whose corrections need an update, such as --editions=2,45,67'); // --editions=2,45,67
+        $this->addOption('editions', 'i', InputOption::VALUE_REQUIRED, 'comma separated list of editions whose corrections need an update, such as --editions=2,45,67 OR »all«, but be warned »all« means 90 000 data sets');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        echo ' = = = = = = = = = = = = = = = = '  . "\n";
-        foreach(explode(',', $input->getOption('editions')) as $editionId){
-          $edtionId = intval(trim($editionId));
-          if($editionId > 0){
+      echo ' = = = = = = = = = = = = = = = = '  . "\n";
+      $flushCounter = 1;
+      foreach($this->getCorrections($input->getOption('editions')) as $correction){
+        echo str_pad($flushCounter, 8, ' ', STR_PAD_LEFT) . ': ' . $correction->getEditionId() . '/' . $correction->getId() . "\n";
+        $correction->setSortValues();
+        $this->entityManager->persist($correction);
 
-              echo '' . $editionId . "\n";
-              
-              $repository = $this->entityManager->getRepository(Correction::class);
-              $corrections = $repository->findBy(['edition' => (string) $editionId]);
-              foreach($corrections as $correction){
-                echo $correction->getId() . "\n";
-              }
-
-
-          }
-          
+        if(!($flushCounter++ % 500)){
+          $this->entityManager->flush();
+          echo '________________________________ F L U S H ________________________________' . "\n";
         }
 
-        //echo str_pad($row, 6, ' ', STR_PAD_LEFT) . ' Zeilen bearbeitet'  . "\n";
+      }
 
-	    return Command::SUCCESS;
-        // return Command::FAILURE;
-        // return Command::INVALID;
+      $this->entityManager->flush();
+      echo '________________________________ F L U S H ________________________________' . "\n";
+
+	  return Command::SUCCESS;
+      // return Command::FAILURE;
+      // return Command::INVALID;
+    }
+
+    private function getCorrections($editions){
+      $repository = $this->entityManager->getRepository(Correction::class);
+      if($editions == 'all'){
+        return $repository->findAll();
+      } else if (preg_match('/^\d+(,\d+)*$/', $editions)) {
+        
+        return $repository->findBy(['edition' => explode(',', $editions));
+      }
+      return [];
     }
 
 }
