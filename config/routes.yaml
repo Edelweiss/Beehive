@@ -4,23 +4,27 @@ PapyrillioBeehive_Archive:
 
 PapyrillioBeehive_About:
     path:  /about
-    controller: App\Controller\DefaultController::about 
+    controller: App\Controller\DefaultController::about
 
 PapyrillioBeehive_Contact:
     path:  /contact
-    controller: App\Controller\DefaultController::contact 
+    controller: App\Controller\DefaultController::contact
 
 PapyrillioBeehive_Help:
     path:  /help
-    controller: App\Controller\DefaultController::help 
+    controller: App\Controller\DefaultController::help
 
 PapyrillioBeehive_Home:
     path:  /
-    controller: App\Controller\DefaultController::index 
+    controller: App\Controller\DefaultController::index
 
 PapyrillioBeehive_Homepage:
     path:  /hello/{name}
-    controller: App\Controller\DefaultController::index 
+    controller: App\Controller\DefaultController::index
+
+PapyrillioBeehive_Admin:
+    path:  /admin
+    controller: App\Controller\DefaultController::admin
 
 # NumberWizard
 
@@ -181,6 +185,10 @@ PapyrillioBeehive_CorrectionLinkSnippet:
 PapyrillioBeehive_Editions:
     path:  /editions
     controller: App\Controller\EditionController::listAll
+
+PapyrillioBeehive_Register:
+    path:  /register
+    controller: App\Controller\RegisterController::listAll
 
 PapyrillioBeehive_EditionList:
     path:  /admin/edition/list

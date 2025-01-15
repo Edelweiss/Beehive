@@ -25,4 +25,7 @@ class DefaultController extends BeehiveController{
     public function index(): Response {
         return $this->render('default/index.html.twig');
     }
+    public function admin(): Response {
+        return $this->render('default/admin.html.twig');
+    }
 }

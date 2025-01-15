@@ -8,7 +8,7 @@
             <link href="{{ asset('css/960/text.css') }}" type="text/css" rel="stylesheet" />
             <link href="{{ asset('css/960/960.css') }}" type="text/css" rel="stylesheet" />
             <link href="{{ asset('css/frontend.css') }}?9" type="text/css" rel="stylesheet" />
-            <link href="{{ asset('css/print.css') }}?3" type="text/css" rel="stylesheet" media="print" /><!--  media="print" -->
+            <link href="{{ asset('css/print.css') }}?2" type="text/css" rel="stylesheet" media="print" /><!--  media="print" -->
         {% endblock %}
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     {% include 'matomo.html' %}
@@ -23,7 +23,7 @@
 		<div id="subHeader" class="grid_10">
 			<div id="navigation" class="grid_10">
 			  <a href="{{ path('PapyrillioBeehive_Home') }}">Startseite</a>
-			  <a href="{{ path('PapyrillioBeehive_CorrectionList') }}">Admin</a>
+			  <a href="{{ path('PapyrillioBeehive_Admin') }}">Admin</a>
 			  {% if app.user %}
 			    <a href="{{ path('PapyrillioBeehive_Logout') }}">Logout</a>
 			  {% else %}

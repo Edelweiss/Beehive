@@ -236,6 +236,10 @@ div#topic.topic_PapyrillioBeehive_Editions {
     background-image: url("../images/frontend/topic_honeycomb.png");
 }
 
+div#topic.topic_PapyrillioBeehive_Register {
+    background-image: url("../images/frontend/topic_leaf.png");
+}
+
 div#quick1 {
     background-image: url("../images/frontend/quick1.png");
     background-size: contain;

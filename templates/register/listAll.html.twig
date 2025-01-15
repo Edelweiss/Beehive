@@ -1,0 +1,36 @@
+{% extends 'frontend.html.twig' %}
+
+{% block beta %}
+  
+{% endblock %}
+
+{% block gamma %}
+  
+{% endblock %}
+
+{% block lefty_title %}
+  
+{% endblock %}
+
+{% block lefty %}
+
+{% endblock %}
+
+
+{% block righty_title %}
+  
+{% endblock %}
+
+{% block righty %}
+  
+{% endblock %}
+
+{% block body %}
+<ul style="columns: 4">
+  {% for volume in register %}
+  <li>
+    <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'volume', 'id': volume.series_volume }) }}" title="{{ volume.series }}">{{ volume.series_volume }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

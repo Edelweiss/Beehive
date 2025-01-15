@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\Query\ResultSetMapping;
 use App\Entity\Correction;
 use App\Entity\Register;
 use App\Controller\ApiaryController;
@@ -233,5 +234,18 @@ class RegisterController extends BeehiveController{
       $data['bl'] = array('edition' => $correction->getEdition()->getId(), 'text' => $correction->getText());
     }
     return $data;
+  }
+
+  public function listAll(){
+    
+    $stmt = $this->getDoctrine()->getManager()->getConnection()->prepare('SELECT
+      DISTINCT SUBSTRING_INDEX(ddb, ";", 2) AS series_volume,
+      SUBSTRING_INDEX(ddb, ";", 1) AS series,
+      SUBSTR(SUBSTRING_INDEX(ddb, ";", 2), INSTR(SUBSTRING_INDEX(ddb, ";", 2), ";") + 1) AS volume
+      FROM `register` WHERE ddb IS NOT NULL ORDER BY `ddb`  ASC');
+    
+
+    return $this->render('register/listAll.html.twig', ['register' => $stmt->executeQuery()->fetchAllAssociative()]);
+
   }
 }
