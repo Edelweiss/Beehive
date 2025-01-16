@@ -1,7 +1,7 @@
 {% extends 'frontend.html.twig' %}
 
 {% block beta %}
-  
+  Liste der Editionen nach DDB editions
 {% endblock %}
 
 {% block gamma %}
@@ -22,14 +22,14 @@
 {% endblock %}
 
 {% block righty %}
-  
+  <a href="{{ path('PapyrillioBeehive_Editions', {}) }}" title="View traditional BL editions">BL Editie</a>
 {% endblock %}
 
 {% block body %}
 <ul style="columns: 4">
   {% for volume in register %}
   <li>
-    <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'volume', 'id': volume.series_volume }) }}" title="{{ volume.series }}">{{ volume.series_volume }}</a>
+    <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'volume', 'id': volume.series_volume }) }}" title="{{ volume.series }}">{{ volume.series_volume }} <span style="color: grey;">({{ volume.count_corrections }})</span></a>
   </li>
   {% endfor %}
 </ul>

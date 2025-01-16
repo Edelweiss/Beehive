@@ -114,19 +114,19 @@ Hier können die Bestände nach bestimmten Kriterien gefiltert und in verschiede
   <p>
     <label for="biblio" title="Beispiel: 73664">Papyri.info-Biblio-Id</label>
     <input id="biblio" type="text" class="flyTo greyText" value="Beispiel: 73664" autocomplete="off"
-    title="Blablabla" />
+    title="Id, die von Papyri.info für Bibliographie vergeben wird" />
   </p>
 
   <p>
     <label for="ddb" title="Beispiel: p.mil;2;64">DDB-Hybrid</label>
     <input id="ddb" type="text" class="flyTo greyText" value="Beispiel: p.mil;2;64" autocomplete="off"
-    title="Blablabla" />
+    title="Dreiteilige Id im DDB-Hybrid-Format" />
   </p>
 
   <p>
     <label for="volume" title="Beispiel: p.mil;1;">Band/Editie</label>
     <input id="volume" type="text" class="flyTo greyText" value="Beispiel: p.mil;1;" autocomplete="off"
-    title="Blablabla" />
+    title="Suche nach einem DDB-Band angegeben durch einen Teil der ddb-hybrid-Id" />
   </p>
 
   <br/>
@@ -138,15 +138,28 @@ Hier können die Bestände nach bestimmten Kriterien gefiltert und in verschiede
   <p>
     <label for="search" title="Beispiel: Codices Latini">Suchwort</label>
     <input id="search" type="text" class="flyTo greyText" value="Beispiel: Codices Latini" autocomplete="off"
-    title="Blablabla" />
+    title="Suche im Beschreibungstext der Korrektur" />
   </p>
-  
+
+  <br />
+  <br />
+  <br />
+  <h4>Suchen in Katalogen:</h4>
+  <br/>
+
   <p>
-    <br />
-    <br />
-    <br />
-    <h4>Beispiele für verschiedene Filter und Formate:</h4>
+    Editionen nach <a href="{{ path('PapyrillioBeehive_Editions', {}) }}" title="wie im Druckformat der BL">BL editie</a>
     <br/>
+    Editionen nach <a href="{{ path('PapyrillioBeehive_Register', {}) }}" title="wie auf Papyri.info">DDB volumes</a>
+  </p>
+
+  <br />
+  <br />
+  <br />
+  <h4>Beispiele für verschiedene Filter und Formate:</h4>
+  <br/>
+
+  <p>
     <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'tm', 'id': '19768'}) }}">TM 19768</a>,
     <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'hgv', 'id': '44881zb'}) }}">HGV 44881zb</a>,
     <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'ddb', 'id': 'p.mil;2;64'}) }}">DDB p.mil;2;64</a>,

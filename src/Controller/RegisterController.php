@@ -237,13 +237,25 @@ class RegisterController extends BeehiveController{
   }
 
   public function listAll(){
-    
-    $stmt = $this->getDoctrine()->getManager()->getConnection()->prepare('SELECT
+
+
+    $sql = 'SELECT
       DISTINCT SUBSTRING_INDEX(ddb, ";", 2) AS series_volume,
       SUBSTRING_INDEX(ddb, ";", 1) AS series,
       SUBSTR(SUBSTRING_INDEX(ddb, ";", 2), INSTR(SUBSTRING_INDEX(ddb, ";", 2), ";") + 1) AS volume
-      FROM `register` WHERE ddb IS NOT NULL ORDER BY `ddb`  ASC');
-    
+      FROM `register` WHERE ddb IS NOT NULL ORDER BY `ddb`  ASC';
+
+    $sql = "SELECT
+  SUBSTRING_INDEX(ddb, ';', 2) AS series_volume,
+  SUBSTRING_INDEX(ddb, ';', 1) AS series,
+  SUBSTR(SUBSTRING_INDEX(ddb, ';', 2), INSTR(SUBSTRING_INDEX(ddb, ';', 2), ';') + 1) AS volume,
+  count(*) AS count_corrections
+FROM `register` AS r JOIN correction_register AS cr ON cr.register_id = r.id JOIN correction c ON c.id = cr.correction_id
+WHERE ddb IS NOT NULL
+GROUP BY series_volume  
+ORDER BY `ddb`  ASC";
+
+    $stmt = $this->getDoctrine()->getManager()->getConnection()->prepare($sql);
 
     return $this->render('register/listAll.html.twig', ['register' => $stmt->executeQuery()->fetchAllAssociative()]);
 

@@ -1,7 +1,11 @@
 {% extends 'frontend.html.twig' %}
 
 {% block beta %}
-  Liste der Editionen
+  Liste der Editionen nach BL editie
+{% endblock %}
+
+{% block righty %}
+  <a href="{{ path('PapyrillioBeehive_Register', {}) }}" title="View editions clustered by ddb-hybrid volumes">DDB editions</a>
 {% endblock %}
 
 {% block body %}
