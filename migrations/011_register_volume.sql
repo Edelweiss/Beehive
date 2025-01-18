@@ -1,13 +1,16 @@
-CREATE TABLE `beehive`.`volume` ( `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,  `ddb` VARCHAR(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,  `title` VARCHAR(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,  `sort` INT UNSIGNED NOT NULL ,    PRIMARY KEY  (`id`)) ENGINE = InnoDB;
+CREATE TABLE `beehive`.`volume` ( `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,  `hybrid` VARCHAR(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,  `title` VARCHAR(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,  `sort` INT UNSIGNED NOT NULL ,    PRIMARY KEY  (`id`)) ENGINE = InnoDB;
 
-INSERT INTO `volume` (`id`, `ddb`, `title`, `sort`) VALUES ('1', 'test;1;', 'Test 1', '100');
+insert into
+ volume(id, hybrid, title, sort)
+values
+    (1, 'aegyptus;89', 'Aegyptus 89', 1000),
+    (2, 'aegyptus;90', 'Aegyptus 90', 2000);
 
 ALTER TABLE `register` ADD `volume_id` INT UNSIGNED NOT NULL AFTER `id`;
 
 UPDATE `register` set volume_id = 1;
 
 ALTER TABLE `register` ADD  CONSTRAINT `register_volume` FOREIGN KEY (`volume_id`) REFERENCES `volume`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
 
 
 SELECT * from register r JOIN correction_register cr ON cr.register_id = r.id WHERE ddb LIKE '%cpl%' OR ddb = 'p.ups;;8' OR ddb LIKE '%ddbdp%' OR ddb LIKE '%sosol%';
@@ -25,4 +28,5 @@ DELETE FROM register WHERE ddb LIKE '%ddbdp;2022;%';
 DELETE FROM register WHERE ddb LIKE '%ddbdp;2023;%';
 
 
-
+SELECT * FROM register r JOIN `volume` v ON SUBSTRING_INDEX(r.ddb, ';', 2) = v.ddb ORDER BY v.sort, r.ddb;
+UPDATE register  r JOIN `volume` v ON SUBSTRING_INDEX(r.ddb, ';', 2) = v.hybrid SET r.volume_id = v.id;
