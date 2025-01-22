@@ -187,8 +187,12 @@ PapyrillioBeehive_Editions:
     controller: App\Controller\EditionController::listAll
 
 PapyrillioBeehive_Register:
-    path:  /register
+    path:  /register/{collection}
     controller: App\Controller\RegisterController::listAll
+    defaults:
+        collection: ddb
+    requirements:
+        collection: '(ddb|dclp)'
 
 PapyrillioBeehive_EditionList:
     path:  /admin/edition/list

@@ -236,7 +236,7 @@ class RegisterController extends BeehiveController{
     return $data;
   }
 
-  public function listAll(){
+  public function listAll($collection = 'ddb'){
 
 
     $sql = 'SELECT
@@ -249,15 +249,28 @@ class RegisterController extends BeehiveController{
   SUBSTRING_INDEX(ddb, ';', 2) AS series_volume,
   SUBSTRING_INDEX(ddb, ';', 1) AS series,
   SUBSTR(SUBSTRING_INDEX(ddb, ';', 2), INSTR(SUBSTRING_INDEX(ddb, ';', 2), ';') + 1) AS volume,
-  count(*) AS count_corrections
-FROM `register` AS r JOIN correction_register AS cr ON cr.register_id = r.id JOIN correction c ON c.id = cr.correction_id
+  count(*) AS count_corrections,
+  v.title
+FROM `register` AS r JOIN correction_register AS cr ON cr.register_id = r.id JOIN correction c ON c.id = cr.correction_id LEFT JOIN volume v ON r.volume_id = v.id
 WHERE ddb IS NOT NULL
 GROUP BY series_volume  
-ORDER BY `ddb`  ASC";
+ORDER BY v.sort, `ddb`  ASC";
+
+    $sql = "SELECT
+            hybrid AS series_volume,
+            SUBSTRING_INDEX(hybrid, ';', 1) AS series,
+            SUBSTR(hybrid, INSTR(hybrid, ';') + 1) AS volume,
+            count(*) AS count_corrections,
+            title
+            FROM `register` AS r JOIN correction_register AS cr ON cr.register_id = r.id JOIN correction c ON c.id = cr.correction_id " . ($collection == 'ddb' ? 'LEFT' : '' ) . " JOIN volume v ON r.volume_id = v.id
+            WHERE " . $collection . " IS NOT NULL
+            GROUP BY v.id
+            ORDER BY v.sort  ASC";
+
 
     $stmt = $this->getDoctrine()->getManager()->getConnection()->prepare($sql);
 
-    return $this->render('register/listAll.html.twig', ['register' => $stmt->executeQuery()->fetchAllAssociative()]);
+    return $this->render('register/listAll.html.twig', ['collection' => $collection, 'register' => $stmt->executeQuery()->fetchAllAssociative()]);
 
   }
 }

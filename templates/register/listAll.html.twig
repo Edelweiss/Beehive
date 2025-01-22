@@ -1,11 +1,13 @@
 {% extends 'frontend.html.twig' %}
 
 {% block beta %}
-  Liste der Editionen nach DDB editions
+  Liste der Editionen nach {{ collection|upper }} editions
 {% endblock %}
 
 {% block gamma %}
-  
+  {% if collection == 'dclp' %}
+    Achtung inner join, der einige Datensätze unberücksichtig lässt
+  {% endif %}
 {% endblock %}
 
 {% block lefty_title %}
@@ -23,13 +25,18 @@
 
 {% block righty %}
   <a href="{{ path('PapyrillioBeehive_Editions', {}) }}" title="View traditional BL editions">BL Editie</a>
+  {% if collection == 'ddb' %}
+    <a href="{{ path('PapyrillioBeehive_Register', {'collection': 'dclp'}) }}" title="View editions clustered by dclp-hybrid volumes">DCLP editions</a>
+  {% else %}
+    <a href="{{ path('PapyrillioBeehive_Register', {}) }}" title="View editions clustered by ddb-hybrid volumes">DDB editions</a>
+  {% endif %}
 {% endblock %}
 
 {% block body %}
 <ul style="columns: 4">
   {% for volume in register %}
   <li>
-    <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'volume', 'id': volume.series_volume }) }}" title="{{ volume.series }}">{{ volume.series_volume }} <span style="color: grey;">({{ volume.count_corrections }})</span></a>
+    <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'volume', 'id': volume.series_volume }) }}" title="{{ volume.series }}">{{ volume.title ? volume.title : volume.series_volume }} <span style="color: grey;">({{ volume.count_corrections }})</span></a>
   </li>
   {% endfor %}
 </ul>
