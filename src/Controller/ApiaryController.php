@@ -82,7 +82,7 @@ class ApiaryController extends BeehiveController{
     if($type === 'editie' && count($corrections)){
       return $corrections[0]->getEdition()->getTitle();
     }
-    if(\in_array($type, ['tm', 'hgv', 'ddb', 'biblio', 'volume', 'register'])){
+    if(\in_array($type, ['tm', 'hgv', 'ddb', 'biblio', 'register'])){
       return strtoupper($type) . ' ' . $id;
     }
     if($type === 'collection'){
