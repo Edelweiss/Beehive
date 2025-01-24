@@ -14,7 +14,7 @@
       {% if compilationsOfInterest|length > 1  %}, {% endif %}<a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': 'collection', 'id': 'BOEP' }) }}" title="Bulletin of Online Emendations to Papyri">BOEP</a>
     {% endif %}
 
-    {% if type not in ['bl', 'boep', 'editie', 'search', 'volume'] and corrections|length and corrections|first.registerEntries|length %}
+    {% if type not in ['bl', 'boep', 'editie', 'search', 'volume', 'volume_dclp'] and corrections|length and corrections|first.registerEntries|length %}
       {% set r = corrections|first.registerEntries|first %}
       <br />
       Weitere identifier und Links:
@@ -37,7 +37,7 @@
 
 {% block lefty_title %}
   {%if type != 'editie' and corrections|length %}
-    {% if type == 'volume' %}
+    {% if type in ['volume', 'volume_dclp'] %}
       {{ id }} in
       <br/>
       BL&nbsp;Online
@@ -94,7 +94,7 @@
 
 {% block righty_title %}
   {% if corrections|length %}
-    {% if type in ['tm', 'hgv', 'ddb', 'volume', 'biblio', 'register', 'editie'] %}
+    {% if type in ['tm', 'hgv', 'ddb', 'volume', 'volume_dclp', 'biblio', 'register', 'editie'] %}
     {% else %}
     weitere
     {{ corrections|first.compilation.collection }}s
@@ -103,7 +103,7 @@
 {% endblock %}
 
 {% block righty %}
-  {% if type in ['tm', 'hgv', 'ddb', 'volume', 'biblio', 'register', 'editie'] %}
+  {% if type in ['tm', 'hgv', 'ddb', 'volume', 'volume_dclp', 'biblio', 'register', 'editie'] %}
   {% else %}
     <ul>
       {% for c in compilations %}
