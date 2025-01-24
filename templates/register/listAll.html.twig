@@ -1,5 +1,9 @@
 {% extends 'frontend.html.twig' %}
 
+{% block title %}
+  Register-{{ collection == 'dclp' ? 'DCLP' : 'DDB' }}|{{ parent() }}
+{% endblock %}
+
 {% block beta %}
   Liste der Editionen nach {{ collection|upper }} editions
 {% endblock %}

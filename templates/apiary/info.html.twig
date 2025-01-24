@@ -1,5 +1,9 @@
 {% extends 'frontend.html.twig' %}
 
+{% block title %}
+  {{ correction.id }}|{{ parent() }}
+{% endblock %}
+
 {% block beta %}
   BL-Eintrag zu {{ correction.edition.title }}
   <span id="text" class="edit">{{ correction.text }}</span>{% if correction.position %}, <span id="position" class="edit">{{ correction.position }}</span>{% endif %}
