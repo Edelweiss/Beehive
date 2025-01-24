@@ -126,8 +126,8 @@ class ApiaryController extends BeehiveController{
     // WHERE
 
     $where = self::$TYPES[$type] . ' = :id';
-    if(in_array($type['boep', 'volume', 'volume_dclp'])){
-      if(in_array($type['boep', 'volume', 'volume_dclp']) && !str_ends_with($id, ';')){
+    if(in_array($type, ['boep', 'volume', 'volume_dclp'])){
+      if(in_array($type, ['boep', 'volume', 'volume_dclp']) && !str_ends_with($id, ';')){
         $id .= ';';
       }
       $where = self::$TYPES[$type] . ' LIKE :id';
