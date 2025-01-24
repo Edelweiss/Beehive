@@ -15,7 +15,7 @@ use DateTime;
 
 class ApiaryController extends BeehiveController{
 
-  protected static $TYPES = ['tm' => 'r.tm', 'hgv' => 'r.hgv', 'ddb' => 'r.ddb', 'biblio' => 'c.source', 'bl' => 'c2.volume', 'register' => 'r.id', 'boep' => 'c2.title', 'collection' => 'c2.collection', 'volume' => 'r.ddb', 'editie' => 'c.edition', 'search' => 'c.description'];
+  protected static $TYPES = ['tm' => 'r.tm', 'hgv' => 'r.hgv', 'ddb' => 'r.ddb', 'biblio' => 'c.source', 'bl' => 'c2.volume', 'register' => 'r.id', 'boep' => 'c2.title', 'collection' => 'c2.collection', 'volume' => 'r.ddb', 'volume_dclp' => 'r.dclp', 'editie' => 'c.edition', 'search' => 'c.description'];
 
   public function index(): Response{
     $entityManager = $this->getDoctrine()->getManager();
@@ -126,8 +126,8 @@ class ApiaryController extends BeehiveController{
     // WHERE
 
     $where = self::$TYPES[$type] . ' = :id';
-    if($type === 'boep' || $type === 'volume'){
-      if($type === 'volume' && !str_ends_with($id, ';')){
+    if(in_array($type['boep', 'volume', 'volume_dclp'])){
+      if(in_array($type['boep', 'volume', 'volume_dclp']) && !str_ends_with($id, ';')){
         $id .= ';';
       }
       $where = self::$TYPES[$type] . ' LIKE :id';
