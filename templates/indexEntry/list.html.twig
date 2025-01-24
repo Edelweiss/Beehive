@@ -1,7 +1,7 @@
 {% extends 'frontend.html.twig' %}
 
 {% block title %}
-  {{ type }}|{{ parent() }}
+  {{ type == 'Ghostword' ? 'Ghostwords' : 'Neue Wörter' }}|{{ parent() }}
 {% endblock %}
 
 {% block beta %}
