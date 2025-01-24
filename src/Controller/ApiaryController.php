@@ -98,6 +98,9 @@ class ApiaryController extends BeehiveController{
         return 'Bulletin of Online Emendations to Papyri';
       }
     }
+    if($type === 'volume_dclp'){
+      return $id . ' (in DCLP)';
+    }
     return $id;
   }
   
