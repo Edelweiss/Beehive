@@ -37,7 +37,7 @@
 <ul style="columns: 4">
   {% for volume in register %}
   <li>
-    <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': collection == 'volume_dclp' ? 'volume_dclp' : 'volume', 'id': volume.series_volume }) }}" title="{{ volume.series }}">{{ volume.title ? volume.title : volume.series_volume }} <span style="color: grey;">({{ volume.count_corrections }})</span></a>
+    <a href="{{ path('PapyrillioBeehive_ApiaryHoney', {'type': collection == 'dclp' ? 'volume_dclp' : 'volume', 'id': volume.series_volume }) }}" title="{{ volume.series }}">{{ volume.title ? volume.title : volume.series_volume }} <span style="color: grey;">({{ volume.count_corrections }})</span></a>
   </li>
   {% endfor %}
 </ul>
