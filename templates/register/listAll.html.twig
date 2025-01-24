@@ -25,10 +25,11 @@
 
 {% block righty %}
   <a href="{{ path('PapyrillioBeehive_Editions', {}) }}" title="View traditional BL editions">BL Editie</a>
-  {% if collection == 'ddb' %}
-    <a href="{{ path('PapyrillioBeehive_Register', {'collection': 'dclp'}) }}" title="View editions clustered by dclp-hybrid volumes">DCLP editions</a>
-  {% else %}
+  {% if collection != 'ddb' %}
     <a href="{{ path('PapyrillioBeehive_Register', {}) }}" title="View editions clustered by ddb-hybrid volumes">DDB editions</a>
+  {% endif %}
+  {% if collection != 'dclp' %}
+    <a href="{{ path('PapyrillioBeehive_Register', {'collection': 'dclp'}) }}" title="View editions clustered by dclp-hybrid volumes">DCLP editions</a>
   {% endif %}
 {% endblock %}
 

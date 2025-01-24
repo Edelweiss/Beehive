@@ -1,15 +1,16 @@
 {% set edition = '' %}
 {% set text = '' %}
 
-<div class="apiary" style="position: relative;">
+<div class="apiary">
   {% for c in corrections %}
     {% if c.edition.title != edition %}
-      <h4 id="{{ c.edition.title|replace({' ': '_', '.': ''}) }}" class="edition" style="position: absolute;">
-        {{ c.edition.title }} <span><a href="#top" title="zurück zum Anfang" class="backtotop">⇧</a></span>
-        {% set edition = c.edition.title %}
-        {% set text = '' %}
-      </h4>
-
+      <div style="position: relative; height: 40px;">
+        <h4 id="{{ c.edition.title|replace({' ': '_', '.': ''}) }}" class="edition" style="position: absolute; top: 10px; width: 700px;">
+          {{ c.edition.title }} <span style="float: right;"><a href="#top" title="zurück zum Anfang" class="backtotop">⇧</a></span>
+          {% set edition = c.edition.title %}
+          {% set text = '' %}
+        </h4>
+      </div>
       {% for d in c.edition.docketEntries %}
       <div class="docket">
         {% if d.position or d.text %}
