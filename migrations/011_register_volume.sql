@@ -947,12 +947,9 @@ values
 (NULL, 'zpe;224', 'ZPE 224', 957000),
 (NULL, 'zpe;226', 'ZPE 226', 958000);
 
-ALTER TABLE `register` ADD `volume_id` INT UNSIGNED NOT NULL AFTER `id`;
-
-UPDATE `register` set volume_id = 1;
+ALTER TABLE `register` ADD `volume_id` INT UNSIGNED NULL AFTER `id`; 
 
 ALTER TABLE `register` ADD  CONSTRAINT `register_volume` FOREIGN KEY (`volume_id`) REFERENCES `volume`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
 
 SELECT * from register r JOIN correction_register cr ON cr.register_id = r.id WHERE ddb LIKE '%cpl%' OR ddb = 'p.ups;;8' OR ddb LIKE '%ddbdp%' OR ddb LIKE '%sosol%';
 

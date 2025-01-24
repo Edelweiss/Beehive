@@ -4,7 +4,7 @@ c.short, type, topic, tab, CONCAT(IF(papy_new = 1, '*', ''), IF(greek_new = 1, '
 
 FROM compilation c JOIN `compilation_index_entry` ci ON ci.compilation_id = c.id JOIN index_entry i ON ci.index_entry_id = i.id
 
-WHERE ci.compilation_id = 12
+WHERE ci.compilation_id = 3
 
 ORDER BY i.sort
 

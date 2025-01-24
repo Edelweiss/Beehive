@@ -60,3 +60,14 @@ SELECT
   WHERE
     m.correction_id is NULL
   ORDER BY m.lfd ASC
+
+
+/* nxm-Tabellen füllen */
+
+INSERT INTO compilation_index_entry (compilation_id, index_entry_id) VALUES
+(8,92),
+(2,94);
+
+INSERT INTO correction_index_entry (correction_id, index_entry_id) VALUES
+(21629,9365),
+(21642,17467);
