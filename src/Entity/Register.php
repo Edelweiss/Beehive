@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RegisterRepository;
+use \App\Entity\Volume
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Loggable;
 use Doctrine\ORM\Event\LifecycleEventArgs; // prePersist
@@ -310,6 +311,16 @@ class Register
     public function getCorrections()
     {
         return $this->corrections;
+    }
+
+    public function setVolume(\App\Entity\Volume $volume)
+    {
+        $this->volume = $volume;
+    }
+
+    public function getVolume()
+    {
+        return $this->volume;
     }
 
     public function __toString(){
