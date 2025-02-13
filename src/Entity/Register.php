@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RegisterRepository;
-use \App\Entity\Volume;
+use App\Entity\Volume;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Loggable;
 use Doctrine\ORM\Event\LifecycleEventArgs; // prePersist
