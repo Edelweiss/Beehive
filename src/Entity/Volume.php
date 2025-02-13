@@ -50,7 +50,7 @@ class Volume
         $this->registerEntries = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function addRegisterEntry(\App\Entity\RegisterEntry $registerEntry)
+    public function addRegisterEntry(\App\Entity\Register $registerEntry)
     {
         $this->registerEntries[] = $registerEntry;
     }
