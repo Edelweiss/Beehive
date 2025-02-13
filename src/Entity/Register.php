@@ -326,17 +326,16 @@ class Register
 
     public function linkVolume(\App\Entity\Volume $volume = null)
     {
-        if($volume){
-          $this->setVolume($volume);
-        }
-        $this->volume = null;
-        else {
-          //try to find fitting volume by ddb-hybrid or dclp-hybrid
-          if($this->ddb){
-          }
-          if($this->dclp) {
-          }
-        }
+    if($volume){
+      $this->setVolume($volume);
+    }
+    else {
+      //try to find fitting volume by ddb-hybrid or dclp-hybrid
+      if($this->ddb){
+      }
+      if($this->dclp) {
+      }
+    }
     }
 
     public function __toString(){
