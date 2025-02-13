@@ -182,6 +182,7 @@ class Register
      * @var Papyrillio\BeehiveBundle\Entity\Correction
      */
     private $corrections;
+    private $volume;
 
     /**
      * Get id
