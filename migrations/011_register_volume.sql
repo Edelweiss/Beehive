@@ -967,5 +967,9 @@ DELETE FROM register WHERE ddb LIKE '%ddbdp;2023;%';
 
 
 SELECT * FROM register r JOIN `volume` v ON SUBSTRING_INDEX(r.ddb, ';', 2) = v.ddb ORDER BY v.sort, r.ddb;
-UPDATE register  r JOIN `volume` v ON SUBSTRING_INDEX(r.ddb, ';', 2) = v.hybrid SET r.volume_id = v.id WHERE ddb IS NOT NULL;
-UPDATE register  r JOIN `volume` v ON SUBSTRING_INDEX(r.dclp, ';', 2) = v.hybrid SET r.volume_id = v.id WHERE ddb IS NULL AND dclp IS NOT NULL;
+UPDATE register r JOIN `volume` v ON SUBSTRING_INDEX(r.ddb, ';', 2) = v.hybrid SET r.volume_id = v.id WHERE volume_id IS NULL AND ddb IS NOT NULL;
+UPDATE register r JOIN `volume` v ON SUBSTRING_INDEX(r.dclp, ';', 2) = v.hybrid SET r.volume_id = v.id WHERE volume_id IS NULL AND ddb IS NULL AND dclp IS NOT NULL;
+
+# nicht-zugeordnete checken
+SELECT DISTINCT SUBSTRING_INDEX(ddb, ';', 2) FROM `register` WHERE volume_id IS NULL AND ddb IS NOT NULL ORDER BY ddb LIMIT 1000;
+SELECT * FROM `register` WHERE volume_id IS NULL AND ddb IS NOT NULL;
